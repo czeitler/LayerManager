@@ -38,6 +38,12 @@ public abstract class Layer extends Component{
 		}
 	return false;
 	}
+	public LinkedList<GameBlock> getListOfCollisionRectangles(){
+		return listOfCollisionRectangles;
+	}
+	public LinkedList<GameBlock> getListOfAllRectangles(){
+		return listOfRectanglesToBePainted;
+	}
 	public ListIterator<GameBlock> getIteratorOfCollisionRectangles(){
 		return listOfCollisionRectangles.listIterator();
 	}

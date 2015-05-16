@@ -20,7 +20,7 @@ public class Foreground extends Layer{
 		foregroundColor = new Color(0, 112, 60);
 
 
-		block1 = new GameBlock(0, 450, 300, 300, foregroundColor);
+		block1 = new GameBlock(0, 700, 300, 300, foregroundColor);
 
 		addNonCollisionRectangle(block1);
 

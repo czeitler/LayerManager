@@ -24,11 +24,7 @@ public class Background extends Layer{
 		sunColor = Color.YELLOW;
 		sunColor.brighter();
 
-
-
-
-
-		mainBackground = new GameBlock(0, 0, 1000, 750, backgroundColor);
+		mainBackground = new GameBlock(0, 0, GameControl.getFrameWidth(), GameControl.getFrameHeight(), backgroundColor);
 		cloud = new GameBlock(800,100,100,100, cloudColor);
 		sun = new GameBlock(100,100,150,150, sunColor);
 
