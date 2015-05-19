@@ -28,6 +28,10 @@ public class Background extends Layer{
 		cloud = new GameBlock(800,100,100,100, cloudColor);
 		sun = new GameBlock(100,100,150,150, sunColor);
 
+		mainBackground.setId("3MB");
+		cloud.setId("3C");
+		sun.setId("3S");
+
 		addNonCollisionRectangle(mainBackground);
 		addNonCollisionRectangle(cloud);
 		addNonCollisionRectangle(sun);

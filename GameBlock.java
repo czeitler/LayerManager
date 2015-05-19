@@ -8,6 +8,7 @@ public class GameBlock extends Rectangle{
 	private int displacementX;
 	private int displacementY;
 	private Color gameBlockColor;
+	private String id;
 
 	public GameBlock(int displacementX, int displacementY, int width, int height){
 		super(width, height);
@@ -24,7 +25,21 @@ public class GameBlock extends Rectangle{
 		this.displacementX = displacementX;
 		this.displacementY = displacementY;
 		this.gameBlockColor = gameBlockColor;
+		String id = null;
 	}
+	public boolean isEquals(GameBlock block){
+		if(id.equals(block.getId())){
+			return true;
+		}
+		return false;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
+	public String getId(){
+		return id;
+	}
+
 	public Rectangle getRectangle(){
 		return new Rectangle(width, height);
 	}
