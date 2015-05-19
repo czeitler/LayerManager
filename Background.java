@@ -12,8 +12,6 @@ public class Background extends Layer{
 	Color cloudColor;
 	Color sunColor;
 
-
-
 	public Background(){
 		super();
 
@@ -28,16 +26,17 @@ public class Background extends Layer{
 		cloud = new GameBlock(800,100,100,100, cloudColor);
 		sun = new GameBlock(100,100,150,150, sunColor);
 
-		mainBackground.setId("3MB");
-		cloud.setId("3C");
-		sun.setId("3S");
+		mainBackground.setId("MAIN_BACKGROUND");
+		cloud.setId("CLOUD");
+		sun.setId("SUN");
 
 		addNonCollisionRectangle(mainBackground);
 		addNonCollisionRectangle(cloud);
 		addNonCollisionRectangle(sun);
 
 	}
-
+	public void updateCollRectList(GameBlock oldBlock, GameBlock newBlock){}
+	public void updatePaintRectList(GameBlock oldBlock, GameBlock newBlock){}
 
 
 }

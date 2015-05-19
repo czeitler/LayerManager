@@ -14,46 +14,24 @@ public abstract class Layer extends Component{
 	protected int numberOfRectangles;
 
 	public Layer(){
-		listOfCollisionRectangles = new LinkedList<GameBlock>();
-		listOfRectanglesToBePainted = new LinkedList<GameBlock>();
+		listOfCollisionRectangles = new LinkedList();
+		listOfRectanglesToBePainted = new LinkedList();
 		numberOfRectangles = 0;
 	}
+	//Adds a collision rectangle to the layer space. This puts it in two linked list, listOfCollisionRectangles and listOfRectanglesToBePainted.
+	//Collision rectangles from the linked list will not be painted directly from that linked list. They are also stored in listOfRectanglesToBePainted
+	//which is how they are painted. Therefore when updating the look and display of the program, you only need to manipulate the listOfRectanglesToBePainted
+	//linked list. When you need to make sure the collision dimensions move as well, you need to manipulate the listOfCollisionRectangles linked list.
 	public void addCollisionRectangle(GameBlock newCollisionRectangle){
 		listOfCollisionRectangles.add(newCollisionRectangle);
 		listOfRectanglesToBePainted.add(newCollisionRectangle);
 		numberOfRectangles++;
 	}
+	//Adds a non collision rectangle to the layer space. This puts it in a linked list that needs to be modified every time the user updates a component within the layer.
 	public void addNonCollisionRectangle(GameBlock newNonCollisionRectangle){
 		listOfRectanglesToBePainted.add(newNonCollisionRectangle);
 		numberOfRectangles++;
 	}
-	public void updateRectangle(GameBlock oldRectangle, GameBlock newRectangle){
-
-		boolean isRectInCollision = false;
-
-		//Check if it is  a collision rectangle.
-		ListIterator<GameBlock> itrColl = listOfCollisionRectangles.listIterator();
-
-		while(itrColl.hasNext()){
-			//If the GameBlock found within the iterator is equivalent id wise to the inputted oldRectangle, then the old rectangle
-			//needs to removed from both the listOfCollisionRectangles and also listOfRectanglesToBePainted. The newRectangle
-			//will then needed to be added to both of these list.
-			if(itrColl.next().isEquals(oldRectangle)){//RETURNS TRUE, then the oldRectangle was a collision rectangle.
-				isRectInCollision = true;
-			}
-		}
-		if(isRectInCollision){ //remove the oldRectangle from the list of listOfCollisionRectangles and add the newRectangle to that list.
-			listOfCollisionRectangles.remove(oldRectangle);
-			listOfCollisionRectangles.add(newRectangle);
-			listOfRectanglesToBePainted.remove(oldRectangle);
-			listOfRectanglesToBePainted.add(newRectangle);
-		}
-		else{ //This means that the oldRectangle was a non-collision rectangle. Only the list named listOfRectanglesToBePainted needs to be updated.
-			listOfRectanglesToBePainted.remove(oldRectangle);
-			listOfRectanglesToBePainted.add(newRectangle);
-		}
-	}
-
 
 	//Given a rectangle, check if the given rectangle collides with any of the listOfCollisionRectangles
 	public boolean checkCollision(GameBlock rect){
@@ -65,17 +43,18 @@ public abstract class Layer extends Component{
 		}
 	return false;
 	}
+	public abstract void updatePaintRectList(GameBlock oldBlock, GameBlock newBlock);
+	public abstract void updateCollRectList(GameBlock oldBlock, GameBlock newBlock);
+
+
+
+	//Returns the linked list that holds all of the collision rectangles.
 	public LinkedList<GameBlock> getListOfCollisionRectangles(){
 		return listOfCollisionRectangles;
 	}
+	//Returns the linked list that holds all of the painted rectangles.
 	public LinkedList<GameBlock> getListOfAllRectangles(){
 		return listOfRectanglesToBePainted;
-	}
-	public ListIterator<GameBlock> getIteratorOfCollisionRectangles(){
-		return listOfCollisionRectangles.listIterator();
-	}
-	public ListIterator<GameBlock> getIteratorOfToBePaintedRectangles(){
-		return listOfRectanglesToBePainted.listIterator();
 	}
 	//We need a method that will paint every single rectangle inside of the listOfRectanglesToBePainted.
 	public void paint (Graphics g){

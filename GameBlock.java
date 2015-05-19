@@ -16,6 +16,7 @@ public class GameBlock extends Rectangle{
 		this.height = height;
 		this.displacementX = displacementX;
 		this.displacementY = displacementY;
+		id = null;
 	}
 	//Has a color parameter
 	public GameBlock(int displacementX, int displacementY, int width, int height, Color gameBlockColor){
@@ -25,23 +26,19 @@ public class GameBlock extends Rectangle{
 		this.displacementX = displacementX;
 		this.displacementY = displacementY;
 		this.gameBlockColor = gameBlockColor;
-		String id = null;
+		id = null;
 	}
-	public boolean isEquals(GameBlock block){
-		if(id.equals(block.getId())){
+	public Rectangle getRectangle(){
+		return new Rectangle(width, height);
+	}
+	public void setId(String id){this.id = id;}
+	public String getId(){return id;}
+
+	public boolean isEquals(GameBlock comparisionBlock){
+		if(id.equals(comparisionBlock.getId())){
 			return true;
 		}
 		return false;
-	}
-	public void setId(String id){
-		this.id = id;
-	}
-	public String getId(){
-		return id;
-	}
-
-	public Rectangle getRectangle(){
-		return new Rectangle(width, height);
 	}
 
 	public void setWidth(int width){
